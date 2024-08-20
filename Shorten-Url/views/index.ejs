@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #000;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+        }
+        .form-container, .analytics-container {
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            margin-bottom: 20px; /* Add some space between containers */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto">
+        <div class="form-container bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center">
+            <h1 class="text-3xl mb-4 text-white text-center">URL SHORTENER</h1>
+            <form action="/shorten" method="Post">
+                <input type="text" placeholder="Url" name="url" required class="p-2 rounded bg-gray-700 text-white outline-none w-full max-w-md">
+                <button class="m-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    Create Short Url
+                </button>
+            </form>
+        </div>
+
+        <div class="analytics-container bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h1 class="text-3xl mb-4 text-white text-center">Analytics</h1>
+            <table class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg">
+                <thead>
+                    <tr class="border-b border-gray-600">
+                        <th class="p-4 text-left">Redirect URL</th>
+                        <th class="p-4 text-left">Short URL</th>
+                        <th class="p-4 text-left">Total Clicks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% urls.forEach(url => { %>
+                        <tr class="border-b border-gray-600">
+                            <td class="p-4"><%= url.redirectUrl %></td>
+                            <td class="p-4"><%= url.shortID %></td>
+                            <td class="p-4"><%= url.totalClicks %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
